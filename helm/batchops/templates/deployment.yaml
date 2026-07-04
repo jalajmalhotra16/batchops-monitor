@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-monitor
+  labels:
+    app: batchops-monitor
+spec:
+  replicas: {{ .Values.backend.replicaCount }}  # Number of pod replicas
+  selector:
+    matchLabels:
+      app: batchops-monitor
+  template:
+    metadata:
+      labels:
+        app: batchops-monitor
+    spec:
+      serviceAccountName: {{ .Release.Name }}-monitor
+      containers:
+        - name: {{ .Release.Name }}-monitor
+          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag }}"
+          imagePullPolicy: IfNotPresent 
+          ports:
+            - containerPort: 5000
+          env:
+            - name: ENVIRONMENT
+              value: "test"
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+

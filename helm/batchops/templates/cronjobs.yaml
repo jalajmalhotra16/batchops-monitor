@@ -1,0 +1,86 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: loan-sync
+spec:
+  schedule: "*/5 * * * *"  # This sets the schedule to run every 5 minutes
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: loan-sync
+              image: busybox:latest
+              imagePullPolicy: IfNotPresent
+              command:
+              - /bin/sh
+              - -c
+              - date; echo This is loan-sync
+          restartPolicy: OnFailure
+
+---
+
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: customer-sync
+spec:
+  schedule: "*/5 * * * *"  # This sets the schedule to run every 5 minutes
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: customer-sync
+              image: busybox:latest
+              imagePullPolicy: IfNotPresent
+              command:
+              - /bin/sh
+              - -c
+              - date; echo This is customer-sync
+          restartPolicy: OnFailure
+
+---
+
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: interest-calculation
+spec:
+  schedule: "*/5 * * * *"  # This sets the schedule to run every 5 minutes
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: interest-calculation
+              image: busybox:latest
+              imagePullPolicy: IfNotPresent
+              command:
+              - /bin/sh
+              - -c
+              - date; echo This is interest-calculation
+          restartPolicy: OnFailure
+
+
+---
+
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: statement-generator
+spec:
+  schedule: "*/5 * * * *"  # This sets the schedule to run every 5 minutes
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: statement-generator
+              image: busybox:latest
+              imagePullPolicy: IfNotPresent
+              command:
+              - /bin/sh
+              - -c
+              - date; echo This is statement-generator
+          restartPolicy: OnFailure

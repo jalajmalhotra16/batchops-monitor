@@ -1,0 +1,14 @@
+backend:
+  replicaCount: 1
+  image:
+    repository: batchops_cron
+    tag: v2.2
+
+frontend:
+  replicaCount: 1
+  image:
+    repository: batchops_frontend
+    tag: v2.2
+
+ingress:
+  host: batchops.local

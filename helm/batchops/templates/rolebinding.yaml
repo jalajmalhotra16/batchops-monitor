@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ .Release.Name }}-monitor-rolebinding
+subjects:
+  - kind: ServiceAccount
+    name: {{ .Release.Name }}-monitor
+    namespace: {{ .Release.Namespace }}
+roleRef:
+  kind: ClusterRolegit 
+  name: {{ .Release.Name }}-app-reader
+  apiGroup: rbac.authorization.k8s.io

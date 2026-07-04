@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: batchops-ingress
+  namespace: default
+
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: batchops.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: batchops-frontend
+                port:
+                  number: 80
+
+          - path: /dashboard
+            pathType: Prefix
+            backend:
+              service:
+                name: batchops-monitor
+                port:
+                  number: 80
