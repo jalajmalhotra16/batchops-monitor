@@ -7,6 +7,6 @@ subjects:
     name: {{ .Release.Name }}-monitor
     namespace: {{ .Release.Namespace }}
 roleRef:
-  kind: ClusterRolegit 
+  kind: ClusterRole
   name: {{ .Release.Name }}-app-reader
   apiGroup: rbac.authorization.k8s.io
