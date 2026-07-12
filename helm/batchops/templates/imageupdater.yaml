@@ -1,33 +1,35 @@
+{{- if .Values.imageUpdater.enabled }}
 apiVersion: argocd-image-updater.argoproj.io/v1alpha1
 kind: ImageUpdater
 metadata:
-  name: {{ .Release.Name }}
+  name: {{ .Values.imageUpdater.applicationName }}
   namespace: argocd
 
 spec:
   applicationRefs:
     - namePattern: {{ .Values.imageUpdater.applicationName }}
+
       writeBackConfig:
         method: git
         gitConfig:
-          repository: {{ .Values.imageUpdater.git.repository }}
           branch: {{ .Values.imageUpdater.git.branch }}
-          writeBackTarget: helmvalues:values-gke.yaml
+          writeBackTarget: helmvalues:./values-gke.yaml
 
-  images:
-    - alias: backend
-      imageName: {{ .Values.backend.image.repository }}
-      manifestTargets:
-        helm:
-          name: backend.image.repository
-          tag: backend.image.tag
+      commonUpdateSettings:
+        updateStrategy: latest
 
-    - alias: frontend
-      imageName: {{ .Values.frontend.image.repository }}
-      manifestTargets:
-        helm:
-          name: frontend.image.repository
-          tag: frontend.image.tag
+      images:
+        - alias: backend
+          imageName: {{ .Values.backend.image.repository }}
+          manifestTargets:
+            helm:
+              name: backend.image.repository
+              tag: backend.image.tag
 
-  commonUpdateSettings:
-    updateStrategy: newest-build
+        - alias: frontend
+          imageName: {{ .Values.frontend.image.repository }}
+          manifestTargets:
+            helm:
+              name: frontend.image.repository
+              tag: frontend.image.tag
+{{- end }}

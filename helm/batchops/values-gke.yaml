@@ -15,6 +15,7 @@ ingress:
   host: ""
 
 imageUpdater:
+  enabled: true
   applicationName: batchops-monitor
   git:
     repository: https://github.com/jalajmalhotra16/batchops-monitor.git
