@@ -17,3 +17,13 @@ imageUpdater:
   git:
     repository: https://github.com/jalajmalhotra16/batchops-monitor.git
     branch: main
+
+externalSecrets:
+  enabled: true
+  gcpProjectID: gke-learning-496915
+  clusterLocation: asia-south1-b
+  clusterName: gke-learning
+  serviceAccountName: argocd-image-updater-controller
+  gcpSecretName: argocd-image-updater-github-token      # the secret name in GCP Secret Manager
+  secretName: github-token         # the Kubernetes Secret ESO will create
+  refreshInterval: 1h
