@@ -2,18 +2,15 @@ backend:
   replicaCount: 1
   image:
     repository: asia-south1-docker.pkg.dev/gke-learning-496915/batchops/batchops-backend
-    tag: 0d33199570286db24cf6be0480bfe4abb4b3c775
-
+    tag: latest
 frontend:
   replicaCount: 1
   image:
     repository: asia-south1-docker.pkg.dev/gke-learning-496915/batchops/batchops-frontend
-    tag: 0d33199570286db24cf6be0480bfe4abb4b3c775
-
+    tag: latest
 ingress:
   className: gce
   host: ""
-
 imageUpdater:
   enabled: true
   applicationName: batchops-monitor
