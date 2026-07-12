@@ -4,13 +4,12 @@ kind: ImageUpdater
 metadata:
   name: {{ .Values.imageUpdater.applicationName }}
   namespace: argocd
-
 spec:
   applicationRefs:
     - namePattern: {{ .Values.imageUpdater.applicationName }}
 
       writeBackConfig:
-        method: git
+        method: "git:secret:argocd/github-token"
         gitConfig:
           branch: {{ .Values.imageUpdater.git.branch }}
           writeBackTarget: helmvalues:./values-gke.yaml
