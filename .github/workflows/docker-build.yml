@@ -48,7 +48,7 @@ jobs:
       - name: Push Backend Image
         run: |
           docker push asia-south1-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/batchops/batchops-backend:${{ github.sha }}
-          docker push asia-south1-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/batchops/batchops-backend:latest
+          
 
       ############################################################
       # Frontend
@@ -64,4 +64,4 @@ jobs:
       - name: Push Frontend Image
         run: |
           docker push asia-south1-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/batchops/batchops-frontend:${{ github.sha }}
-          docker push asia-south1-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/batchops/batchops-frontend:latest
+          
