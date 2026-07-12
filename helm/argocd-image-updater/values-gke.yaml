@@ -14,3 +14,12 @@ config:
     prefix: asia-south1-docker.pkg.dev
     api_url: https://asia-south1-docker.pkg.dev
     ping: true
+authScripts:
+  enabled: true
+  scripts:
+    gar-login.sh: |
+      #!/bin/sh
+      ACCESS_TOKEN=$(wget -q -O- --header="Metadata-Flavor: Google" \
+        "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token" \
+        | grep -Eo '"access_token":.*?[^\\]",' | cut -d '"' -f 4)
+      echo "oauth2accesstoken:${ACCESS_TOKEN}"
