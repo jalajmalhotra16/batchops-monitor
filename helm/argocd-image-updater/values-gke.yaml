@@ -1,0 +1,16 @@
+serviceAccount:
+  create: true
+  name: argocd-image-updater-controller
+  annotations:
+    iam.gke.io/gcp-service-account: argocd-image-updater@gke-learning-496915.iam.gserviceaccount.com
+extraEnvFrom:
+  - secretRef:
+      name: github-token
+config:
+  git.user: "Argo CD Image Updater updating the config"
+  git.email: "argocd@time-to-achieve.com"
+  registries:
+  - name: Artifact Registry
+    prefix: asia-south1-docker.pkg.dev
+    api_url: https://asia-south1-docker.pkg.dev
+    ping: true
