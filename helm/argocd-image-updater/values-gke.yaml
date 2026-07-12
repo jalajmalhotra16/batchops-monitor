@@ -13,6 +13,8 @@ config:
   - name: Artifact Registry
     prefix: asia-south1-docker.pkg.dev
     api_url: https://asia-south1-docker.pkg.dev
+    credentials: ext:/scripts/gar-login.sh
+    credsexpire: 50m
     ping: true
 authScripts:
   enabled: true
