@@ -2,23 +2,21 @@ backend:
   replicaCount: 1
   image:
     repository: asia-south1-docker.pkg.dev/gke-learning-496915/batchops/batchops-backend
-    tag: 2f2f498b425f24cf0827dcf00fd2b82107f54cc9
+    tag: 0e830af25f02568b8c5dbbe86bf9017e9f4790a2
 frontend:
   replicaCount: 1
   image:
     repository: asia-south1-docker.pkg.dev/gke-learning-496915/batchops/batchops-frontend
-    tag: 2f2f498b425f24cf0827dcf00fd2b82107f54cc9
+    tag: 0e830af25f02568b8c5dbbe86bf9017e9f4790a2
 ingress:
   className: gce
   host: ""
-
-
 externalSecrets:
   enabled: true
   gcpProjectID: gke-learning-496915
   clusterLocation: asia-south1-b
   clusterName: gke-learning
   serviceAccountName: argocd-image-updater-controller
-  gcpSecretName: argocd-image-updater-github-token      # the secret name in GCP Secret Manager
-  secretName: github-token         # the Kubernetes Secret ESO will create
+  gcpSecretName: argocd-image-updater-github-token # the secret name in GCP Secret Manager
+  secretName: github-token # the Kubernetes Secret ESO will create
   refreshInterval: 1h
