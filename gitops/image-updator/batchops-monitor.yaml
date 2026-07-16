@@ -7,7 +7,7 @@ git:
   branch: main
 
   writeBack:
-    target: helmvalues:gitops/applications/batchops/values.yaml
+    target: helmvalues:values-gke.yaml
     secret:
       name: github-token
 
