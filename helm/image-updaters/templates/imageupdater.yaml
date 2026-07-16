@@ -1,0 +1,29 @@
+{{- if .Values.enabled }}
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  name: {{ .Values.application.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  applicationRefs:
+    - namePattern: {{ .Values.application.name }}
+
+      writeBackConfig:
+        method: "git:secret:{{ .Values.namespace }}/{{  .Values.git.writeBack.secret.name }}"
+        gitConfig:
+          branch: {{ .Values.git.branch }}
+          writeBackTarget: {{ .Values.git.writeBack.target }}
+
+      commonUpdateSettings:
+        updateStrategy: latest
+
+      images:
+{{- range .Values.images }}
+        - alias: {{ .alias }}
+          imageName: {{ .repository }}
+          manifestTargets:
+            helm:
+              name: {{ .repositoryKey }}
+              tag: {{ .tagKey }}
+{{- end }}
+{{- end }}

@@ -1,0 +1,47 @@
+enabled: true
+namespace: argocd
+application:
+  name: batchops-monitor
+
+git:
+  branch: main
+
+  writeBack:
+    target: helmvalues:gitops/applications/batchops/values.yaml
+    secret:
+      name: github-token
+
+images:
+  - alias: backend
+    repository: asia-south1-docker.pkg.dev/gke-learning-496915/batchops/batchops-backend
+    repositoryKey: backend.image.repository
+    tagKey: backend.image.tag
+
+  - alias: frontend
+    repository: asia-south1-docker.pkg.dev/gke-learning-496915/batchops/batchops-frontend
+    repositoryKey: frontend.image.repository
+    tagKey: frontend.image.tag
+
+externalSecrets:
+
+  enabled: true
+
+  secretStore:
+    name: gcp-secret-store
+    gcp:
+      projectID: gke-learning-496915
+      clusterLocation: asia-south1-b
+      clusterName: gke-learning
+      serviceAccountName: argocd-image-updater-controller
+
+  refreshInterval: 1h
+
+  remoteSecret:
+    name: argocd-image-updater-github-token
+
+  data:
+    - secretKey: username
+      property: username
+
+    - secretKey: password
+      property: password

@@ -11,12 +11,7 @@ frontend:
 ingress:
   className: gce
   host: ""
-imageUpdater:
-  enabled: true
-  applicationName: batchops-monitor
-  git:
-    repository: https://github.com/jalajmalhotra16/batchops-monitor.git
-    branch: main
+
 
 externalSecrets:
   enabled: true

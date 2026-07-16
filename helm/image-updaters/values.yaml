@@ -1,0 +1,38 @@
+enabled: true
+namespace: argocd
+application:
+  name: ""
+
+git:
+  branch: main
+
+  writeBack:
+    target: helmvalues:./values-gke.yaml
+    secret:
+      name: github-token
+
+images: []
+
+externalSecrets:
+
+  enabled: true
+
+  secretStore:
+    name: gcp-secret-store
+    gcp:
+      projectID: ""
+      clusterLocation: ""
+      clusterName: ""
+      serviceAccountName: ""
+
+  refreshInterval: 1h
+
+  remoteSecret:
+    name: argocd-image-updater-github-token
+
+  data:
+    - secretKey: username
+      property: username
+
+    - secretKey: password
+      property: password
