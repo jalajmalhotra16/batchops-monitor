@@ -1,0 +1,27 @@
+serviceAccount:
+  create: true
+  name: argocd-image-updater-controller
+  annotations:
+    iam.gke.io/gcp-service-account: argocd-image-updater@gke-learning-496915.iam.gserviceaccount.com
+extraEnvFrom:
+  - secretRef:
+      name: github-token
+config:
+  git.user: "Argo CD Image Updater updating the config"
+  git.email: "argocd@time-to-achieve.com"
+  registries:
+  - name: Artifact Registry
+    prefix: asia-south1-docker.pkg.dev
+    api_url: https://asia-south1-docker.pkg.dev
+    credentials: ext:/scripts/gar-login.sh
+    credsexpire: 50m
+    ping: true
+authScripts:
+  enabled: true
+  scripts:
+    gar-login.sh: |
+      #!/bin/sh
+      ACCESS_TOKEN=$(wget -q -O- --header="Metadata-Flavor: Google" \
+        "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token" \
+        | grep -Eo '"access_token":.*?[^\\]",' | cut -d '"' -f 4)
+      echo "oauth2accesstoken:${ACCESS_TOKEN}"
