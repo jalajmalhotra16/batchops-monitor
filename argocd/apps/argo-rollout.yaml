@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-image-updator
+  namespace: argocd
+spec:
+  project: default
+
+  sources:
+    - repoURL: https://github.com/jalajmalhotra16/batchops-monitor.git
+      targetRevision: main
+      path: helm/argo-rollouts/
+
+      helm:
+        valueFiles:
+          - $values/gitops/apps/argo-rollout.yaml
+
+    - repoURL: https://github.com/jalajmalhotra16/batchops-monitor.git
+      targetRevision: main
+      ref: values
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true 
