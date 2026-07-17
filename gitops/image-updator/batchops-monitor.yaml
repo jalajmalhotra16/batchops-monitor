@@ -7,7 +7,7 @@ git:
   branch: main
 
   writeBack:
-    target: helmvalues:gitops/apps/batchops-monitor.yaml
+    target: helmvalues:../../gitops/apps/batchops-monitor.yaml
     secret:
       name: github-token
 
