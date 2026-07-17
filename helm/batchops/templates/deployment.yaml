@@ -1,5 +1,5 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: {{ .Release.Name }}-monitor
   labels:
@@ -43,4 +43,14 @@ spec:
               port: 5000
             initialDelaySeconds: 15
             periodSeconds: 20
+  strategy:
+    canary:
+      steps:
+        - setWeight: 20
+        - pause: {}
 
+        - setWeight: 50
+        - pause:
+            duration: 60s
+
+        - setWeight: 100
