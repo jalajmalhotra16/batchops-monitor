@@ -20,3 +20,19 @@ externalSecrets:
   gcpSecretName: argocd-image-updater-github-token # the secret name in GCP Secret Manager
   secretName: github-token # the Kubernetes Secret ESO will create
   refreshInterval: 1h
+
+
+keda:
+  enabled: true
+
+  minReplicaCount: 1
+  maxReplicaCount: 3
+
+  pollingInterval: 15
+  cooldownPeriod: 60
+
+  triggers:
+    - type: cpu
+      metricType: Utilization
+      metadata:
+        value: "1"
