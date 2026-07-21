@@ -2,12 +2,12 @@
 apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
-  name: {{ include "batchops.fullname" . }}
+  name: {{ .Release.Name }}-monitor
 spec:
   scaleTargetRef:
     apiVersion: argoproj.io/v1alpha1
     kind: Rollout
-    name: {{ include "batchops.fullname" . }}-monitor
+    name: {{ .Release.Name }}-monitor
 
   minReplicaCount: {{ .Values.keda.minReplicaCount }}
   maxReplicaCount: {{ .Values.keda.maxReplicaCount }}
