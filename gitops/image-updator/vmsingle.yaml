@@ -1,0 +1,19 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMSingle
+metadata:
+  name: victoria
+  namespace: monitoring
+spec:
+  retentionPeriod: "1d"
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+
+  storage:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 2Gi
