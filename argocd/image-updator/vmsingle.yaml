@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/jalajmalhotra16/batchops-monitor.git
     targetRevision: main
-    path: gitops/image-updator/vmsingle.yaml
+    path: gitops/victoria-metrics/
 
   destination:
     server: https://kubernetes.default.svc

@@ -13,7 +13,7 @@ spec:
 
       helm:
         valueFiles:
-          - $values/gitops/victoria-metrics/
+          - $values/gitops/apps/vm.yaml
 
     - repoURL: https://github.com/jalajmalhotra16/batchops-monitor.git
       targetRevision: main
