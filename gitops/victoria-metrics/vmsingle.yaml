@@ -2,7 +2,7 @@ apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMSingle
 metadata:
   name: victoria
-  namespace: monitoring
+  namespace: vm
 spec:
   retentionPeriod: "1d"
 
