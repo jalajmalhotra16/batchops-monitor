@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: victoria-metrics
+  namespace: argocd
+spec:
+  project: default
+
+  sources:
+    - repoURL: https://github.com/jalajmalhotra16/batchops-monitor.git
+      targetRevision: main
+      path: helm/victoria-metrics-operator/
+
+      helm:
+        valueFiles:
+          - $values/gitops/apps/vm.yaml
+
+    - repoURL: https://github.com/jalajmalhotra16/batchops-monitor.git
+      targetRevision: main
+      ref: values
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: vm
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true 
+    syncOptions:
+      - ServerSideApply=true
+      - CreateNamespace=true
