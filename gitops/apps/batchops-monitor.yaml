@@ -35,4 +35,4 @@ keda:
     - type: cpu
       metricType: Utilization
       metadata:
-        value: "1"
+        value: "80"
