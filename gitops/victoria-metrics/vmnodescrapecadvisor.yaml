@@ -1,0 +1,16 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMNodeScrape
+metadata:
+  name: kubelet-cadvisor
+  namespace: vm
+spec:
+  interval: 30s
+  scheme: https
+  port: https-metrics
+  path: /metrics/cadvisor
+
+  bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+
+  tlsConfig:
+    insecureSkipVerify: true
+    caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
