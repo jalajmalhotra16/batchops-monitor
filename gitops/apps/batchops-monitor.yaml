@@ -2,12 +2,12 @@ backend:
   replicaCount: 1
   image:
     repository: asia-south1-docker.pkg.dev/gke-learning-496915/batchops/batchops-backend
-    tag: dacf9060fb855b68a7a3abc9980b639a0287ea51
+    tag: 48012e3ac3ec4d07ce6db25fb3a0bfb655199884
 frontend:
   replicaCount: 1
   image:
     repository: asia-south1-docker.pkg.dev/gke-learning-496915/batchops/batchops-frontend
-    tag: dacf9060fb855b68a7a3abc9980b639a0287ea51
+    tag: 48012e3ac3ec4d07ce6db25fb3a0bfb655199884
 ingress:
   className: gce
   host: ""
@@ -20,19 +20,14 @@ externalSecrets:
   gcpSecretName: argocd-image-updater-github-token # the secret name in GCP Secret Manager
   secretName: github-token # the Kubernetes Secret ESO will create
   refreshInterval: 1h
-
-
 keda:
   enabled: true
-
   minReplicaCount: 1
   maxReplicaCount: 3
-
   pollingInterval: 15
   cooldownPeriod: 60
-
   triggers:
-    - type: cpu
-      metricType: Utilization
-      metadata:
-        value: "80"
+  - type: cpu
+    metricType: Utilization
+    metadata:
+      value: "80"
