@@ -2,12 +2,12 @@ backend:
   replicaCount: 1
   image:
     repository: asia-south1-docker.pkg.dev/gke-learning-496915/batchops/batchops-backend
-    tag: 48012e3ac3ec4d07ce6db25fb3a0bfb655199884
+    tag: 1eecf7b89d6b0b6901bf77ea77a41ccb5e9b6b90
 frontend:
   replicaCount: 1
   image:
     repository: asia-south1-docker.pkg.dev/gke-learning-496915/batchops/batchops-frontend
-    tag: 48012e3ac3ec4d07ce6db25fb3a0bfb655199884
+    tag: 1eecf7b89d6b0b6901bf77ea77a41ccb5e9b6b90
 ingress:
   className: gce
   host: ""
